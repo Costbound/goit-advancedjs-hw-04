@@ -17,5 +17,6 @@ export default async function fetchImages(searchWord, pixabayConfig = {}) {
   const res = await axios.get(pixabayApiUrl, {
     params: { ...defaultConfig, ...pixabayConfig, q: searchWord },
   });
+  console.log(res.data.hits);
   return res.data;
 }

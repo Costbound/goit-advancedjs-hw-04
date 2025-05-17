@@ -1,3 +1,24 @@
+import iziToast from 'izitoast';
+import SimpleLightbox from 'simplelightbox';
+
+export const gallery = document.querySelector('.gallery');
+export const moreBtn = document.querySelector('.more-btn');
+const moreContainer = document.querySelector('.more_container');
+
+const loader = document.createElement('span');
+loader.classList.add('loader');
+
+iziToast.settings({
+  position: 'topRight',
+  messageSize: '16px',
+  displayMode: 2,
+});
+
+const simpleGallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 export function buildImagesHtml(images) {
   return images
     .map(
@@ -46,3 +67,50 @@ export function buildImagesHtml(images) {
     )
     .join(' ');
 }
+
+const clearGallery = () => {
+  gallery.innerHTML = '';
+};
+
+export const renderNewGallery = (images, totalHits) => {
+  const imagesHtml = buildImagesHtml(images);
+  gallery.innerHTML = imagesHtml;
+  simpleGallery.refresh();
+  totalHits > 15 ? showMoreBtn() : hideMoreBtn();
+};
+
+export const appendImagesHtmlToGallery = images => {
+  const imagesHtml = buildImagesHtml(images);
+  gallery.insertAdjacentHTML('beforeend', imagesHtml);
+  simpleGallery.refresh();
+};
+
+export const renderLoaderInGallery = () => {
+  clearGallery();
+  gallery.append(loader);
+  loader.classList.add('center');
+};
+
+export const renderLoaderInMoreContainer = () => {
+  hideMoreBtn();
+  moreContainer.append(loader);
+};
+
+export const removeAndResetLoader = () => {
+  loader.remove();
+  loader.className = 'loader';
+};
+
+export const showMoreBtn = () => {
+  moreBtn.classList.remove('visually-hidden');
+};
+
+export const hideMoreBtn = () => {
+  moreBtn.classList.add('visually-hidden');
+};
+
+export const showErrorMessage = message => {
+  iziToast.error({
+    message,
+  });
+};
