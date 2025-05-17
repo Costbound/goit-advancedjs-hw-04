@@ -3,12 +3,13 @@
   height: 48px;
   border-radius: 50%;
   display: inline-block;
-  position: relative;
   border: 3px solid;
   border-color: #4e75ff #4e75ff transparent transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
   margin: 0 auto;
+  bottom: -60px;
+  left: 49%;
 }
 
 .loader::after,

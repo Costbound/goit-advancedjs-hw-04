@@ -1,4 +1,4 @@
-export function buildGalleryHtml(images) {
+export function buildImagesHtml(images) {
   return images
     .map(
       ({
